@@ -2,15 +2,27 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    NavigatorIOS
 } from 'react-native';
+
+import Login from './components/Login';
+import styles from './styles/index';
 
 export default class Wildhacks2017QRScanner extends Component {
     render() {
-        return (<View></View>);
+        return (
+            <NavigatorIOS
+                  style = {styles.container}
+                  initialRoute={{
+                    title: 'QR Scanner',
+                    component: Login
+                  }}
+            />
+        );
     }
 }
 
