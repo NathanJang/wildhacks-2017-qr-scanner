@@ -1,9 +1,8 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 
 import {
-    Component,
     Text,
     TextInput,
     TouchableHighlight,
@@ -19,16 +18,15 @@ import styles from '../styles/login';
 
 import ActivityView from './ActivityView';
 
-import logo from '../assets/wildhackslogo.png';
-
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.handleResponse = this.handleResponse.bind(this);
     }
 
     static propTypes = {
-        navigator: PropTypes.array.isRequired
+        navigator: PropTypes.object.isRequired
     }
 
     onSearchTextChanged(event) {
@@ -59,7 +57,7 @@ export default class Login extends Component {
         return (
             <ScrollView contentContainerStyle={styles.container}>
 
-                <Image source={logo} style={styles.image}/>
+                <Image source={require('../assets/wildhackslogo.png')} style={styles.image}/>
 
                 <Text style = {styles.description}>
                     Wildhacks Admin Log In
@@ -88,10 +86,10 @@ export default class Login extends Component {
 
                 <Text></Text>
 
-                <View style = {styles.flowRight}>
+                <View style={styles.flowRight}>
                     <TouchableHighlight
-                        style = {styles.button}
-                        underlayColor = '#99d9f4'
+                        style={styles.button}
+                        underlayColor='#99d9f4'
                         onPress={this.handleResponse}
                     >
                         <Text style = {styles.buttonText}>Submit</Text>
