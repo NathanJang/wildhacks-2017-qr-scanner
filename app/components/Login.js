@@ -44,26 +44,29 @@ export default class Login extends Component {
         return(
             <ScrollView contentContainerStyle = {styles.container}>
 
+            <Image source={require('./node_modules/wildhackslogo.png')} style={styles.image}/>
+               
             <Text style = {styles.description}>
-                Wildhack Admin Log In
+                Wildhacks Admin Log In
             </Text>
 
 
-            <TextInput
-                style = {styles.username}
-                value = {this.state.searchString}
-                onChange = {this.onSearchTextChanged.bind(this)}
-                placeholder = 'Enter your username'
-            />
+            <TextInput style = {styles.input}
+                   autoCapitalize="none"
+                   onSubmitEditing={() => this.passwordInput.focus()}
+                   autoCorrect={false}
+                   keyboardType='email-address'
+                   returnKeyType="next"
+                   placeholder='Username'
+                   placeholderTextColor='rgba(0,0,225,0.7)'/>
 
-            <Text></Text>
+            <TextInput style = {styles.input}
+                  returnKeyType="go"
+                  ref={(input)=> this.passwordInput = input}
+                  placeholder='Password'
+                  placeholderTextColor='rgba(0,0,225,0.7)'
+                  secureTextEntry/>
 
-            <TextInput
-                style = {styles.password}
-                value = {this.state.searchString}
-                onChange = {this.onSearchTextChanged.bind(this)}
-                placeholder = 'Enter your password'
-            />
 
             <Text></Text>
 
