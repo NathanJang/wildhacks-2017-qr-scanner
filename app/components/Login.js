@@ -17,6 +17,8 @@ import styles from '../styles/login';
 
 import ActivityView from './ActivityView';
 
+import logo from './node_modules/wildhackslogo.png';
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -30,9 +32,9 @@ export default class Login extends Component {
 
     _handleResponse(){
         this.props.navigator.push({
-        title: 'Results',
-        component: ActivityView,
-        passProps: {myElement: 'text'}
+            title: 'Results',
+            component: ActivityView,
+            passProps: {myElement: 'text'}
         });
     }
 
@@ -41,47 +43,50 @@ export default class Login extends Component {
             ? (<ActivityIndicator size = 'large'/>)
             : (<View/>);
 
-        return(
-            <ScrollView contentContainerStyle = {styles.container}>
+        return (
+            <ScrollView contentContainerStyle={styles.container}>
 
-            <Image source={require('./node_modules/wildhackslogo.png')} style={styles.image}/>
-               
-            <Text style = {styles.description}>
-                Wildhacks Admin Log In
-            </Text>
+                <Image source={logo} style={styles.image}/>
 
-
-            <TextInput style = {styles.input}
-                   autoCapitalize="none"
-                   onSubmitEditing={() => this.passwordInput.focus()}
-                   autoCorrect={false}
-                   keyboardType='email-address'
-                   returnKeyType="next"
-                   placeholder='Username'
-                   placeholderTextColor='rgba(0,0,225,0.7)'/>
-
-            <TextInput style = {styles.input}
-                  returnKeyType="go"
-                  ref={(input)=> this.passwordInput = input}
-                  placeholder='Password'
-                  placeholderTextColor='rgba(0,0,225,0.7)'
-                  secureTextEntry/>
+                <Text style = {styles.description}>
+                    Wildhacks Admin Log In
+                </Text>
 
 
-            <Text></Text>
+                <TextInput
+                    style={styles.input}
+                    autoCapitalize="none"
+                    onSubmitEditing={() => this.passwordInput.focus()}
+                    autoCorrect={false}
+                    keyboardType='email-address'
+                    returnKeyType="next"
+                    placeholder='Username'
+                    placeholderTextColor='rgba(0,0,225,0.7)'
+                />
 
-            <View style = {styles.flowRight}>
-                <TouchableHighlight
-                    style = {styles.button}
-                    underlayColor = '#99d9f4'
-                    onPress={()=>this._handleResponse()}
-                >
-                    <Text style = {styles.buttonText}>Submit</Text>
-                </TouchableHighlight>
-            </View>
+                <TextInput style = {styles.input}
+                    returnKeyType="go"
+                    ref={(input)=> this.passwordInput = input}
+                    placeholder='Password'
+                    placeholderTextColor='rgba(0,0,225,0.7)'
+                    secureTextEntry
+                />
 
-            {spinner}
-            <Text style = {styles.description}>{this.state.message}</Text>
+
+                <Text></Text>
+
+                <View style = {styles.flowRight}>
+                    <TouchableHighlight
+                        style = {styles.button}
+                        underlayColor = '#99d9f4'
+                        onPress={()=>this._handleResponse()}
+                    >
+                        <Text style = {styles.buttonText}>Submit</Text>
+                    </TouchableHighlight>
+                </View>
+
+                {spinner}
+                <Text style={styles.description}>{this.state.message}</Text>
 
             </ScrollView>
         );
