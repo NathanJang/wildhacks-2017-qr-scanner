@@ -22,7 +22,10 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.handleResponse = this.handleResponse.bind(this);
+        this.onSearchTextChanged = this.onSearchTextChanged.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUsernameSubmit = this.handleUsernameSubmit.bind(this);
+        this.handlePasswordInput = this.handlePasswordInput.bind(this);
     }
 
     static propTypes = {
@@ -33,7 +36,7 @@ export default class Login extends Component {
         this.setState({searchString: event.nativeEvent.text});
     }
 
-    handleResponse() {
+    handleSubmit() {
         this.props.navigator.push({
             title: 'Results',
             component: ActivityView,
@@ -59,7 +62,7 @@ export default class Login extends Component {
 
                 <Image source={require('../assets/wildhackslogo.png')} style={styles.image}/>
 
-                <Text style = {styles.description}>
+                <Text style={styles.description}>
                     Wildhacks Admin Log In
                 </Text>
 
@@ -90,7 +93,7 @@ export default class Login extends Component {
                     <TouchableHighlight
                         style={styles.button}
                         underlayColor='#99d9f4'
-                        onPress={this.handleResponse}
+                        onPress={this.handleSubmit}
                     >
                         <Text style = {styles.buttonText}>Submit</Text>
                     </TouchableHighlight>
