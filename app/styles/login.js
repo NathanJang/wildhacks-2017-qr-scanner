@@ -64,7 +64,7 @@ export default StyleSheet.create({
         flexDirection: 'column'
     },
     container: {
-     padding: 20
+        padding: 20
     },
     input:{
         height: 40,
@@ -83,7 +83,7 @@ export default StyleSheet.create({
         fontWeight: '700'
     },  
     image: {
-    width: 300,
-    height: 200
-  },
+        width: 300,
+        height: 200
+    },
 });
