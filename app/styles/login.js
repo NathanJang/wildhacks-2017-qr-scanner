@@ -63,4 +63,27 @@ export default StyleSheet.create({
         padding: 30,
         flexDirection: 'column'
     },
+    container: {
+     padding: 20
+    },
+    input:{
+        height: 40,
+        width: 305,
+        backgroundColor: 'rgba(150,200,255,0.2)',
+        marginBottom: 10,
+        padding: 10,
+    },
+    buttonContainer:{
+        backgroundColor: '#2980b6',
+        paddingVertical: 15
+    },
+    buttonText:{
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: '700'
+    },  
+    image: {
+    width: 300,
+    height: 200
+  },
 });
