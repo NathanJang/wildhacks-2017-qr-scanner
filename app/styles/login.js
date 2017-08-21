@@ -10,7 +10,7 @@ export default StyleSheet.create({
         color: "#656565"
     },
     container: {
-        padding: 30,
+        padding: 20,
         marginTop: 65,
         alignItems: 'center'
     },
@@ -39,7 +39,9 @@ export default StyleSheet.create({
     buttonText: {
         fontSize: 18,
         color: 'white',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: '700'
     },
     button: {
         height: 36,
@@ -63,9 +65,6 @@ export default StyleSheet.create({
         padding: 30,
         flexDirection: 'column'
     },
-    container: {
-        padding: 20
-    },
     input:{
         height: 40,
         width: 305,
@@ -77,11 +76,6 @@ export default StyleSheet.create({
         backgroundColor: '#2980b6',
         paddingVertical: 15
     },
-    buttonText:{
-        color: '#fff',
-        textAlign: 'center',
-        fontWeight: '700'
-    },  
     image: {
         width: 300,
         height: 200

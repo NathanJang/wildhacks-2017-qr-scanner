@@ -1,41 +1,38 @@
 // @flow
 
-import React, {Component} from 'react'
+import React from 'react';
+
 import {
-    StyleSheet,
+    Component,
     Text,
-    TextInput,
-    TouchableHighlight,
-    ActivityIndicator,
-    Image,
     View,
-    ListView,
-    List,
     FlatList
 } from 'react-native';
 
 import styles from '../styles/activityView';
 
 export default class ActivityView extends Component {
+
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
-    render(){
-        return(
-            <View style = {styles.container}>
-                <FlatList
-                    data={[
+    static renderItem(item) {
+        return (<Text style={styles.item}>{item.key}</Text>);
+    }
+
+    render() {
+        return (<View style={styles.container}>
+            <FlatList
+                data={[
                     {key: 'Registration'},
                     {key: 'Meal'},
                     {key: 'Activity'},
-                    ]}
-                    renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-                />
-                <View style = {styles.separator}/>
-            </View>
-        );
+                ]}
+                renderItem={this.renderItem}
+            />
+            <View style={styles.separator} />
+        </View>);
     }
 }
