@@ -4,6 +4,7 @@ import api from '../app/util/wildhacks-api';
 
 const userEmail = 'willie@northwestern.edu';
 const adminEmail = 'steve@me.com';
+const password = 'hunter2';
 
 it('pings', async () => {
     expect.assertions(2);
@@ -19,7 +20,7 @@ it('signs user in', async () => {
     let result = null;
     await expect((async () => result = await api.signAdminIn({
         email: userEmail,
-        password: 'hunter2'
+        password
     }))()).resolves.toBeDefined();
     const user = result.user;
     expect(user.email).toBe(userEmail);
@@ -32,7 +33,7 @@ it('signs admin in', async () => {
     let result = null;
     await expect((async () => result = await api.signAdminIn({
         email: adminEmail,
-        password: 'hunter2'
+        password
     }))()).resolves.toBeDefined();
     const user = result.user;
     expect(user.email).toBe(adminEmail);
@@ -43,8 +44,9 @@ it('signs admin in', async () => {
 });
 
 it('gets user details', async () => {
-    expect.assertions(2);
+    expect.assertions(3);
     expect(adminToken).not.toBeNull();
+    expect(typeof adminToken).toBe('string');
     expect(async () => await api.getUserDetails({
         userEmail,
         adminToken
@@ -52,8 +54,9 @@ it('gets user details', async () => {
 });
 
 it('gets events', async () => {
-    expect.assertions(2);
+    expect.assertions(3);
     expect(adminToken).not.toBeNull();
+    expect(typeof adminToken).toBe('string');
     expect(async () => await api.getEvents({
         adminToken
     })).resolves.toBeDefined();
