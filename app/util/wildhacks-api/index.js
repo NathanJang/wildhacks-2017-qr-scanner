@@ -2,6 +2,10 @@
 import endpoints from './endpoints';
 import request from 'request-promise';
 
+function headerForToken(token) {
+    return `Bearer ${token}`;
+}
+
 async function ping() {
     return await request({
         uri: endpoints.pingEndpoint,
@@ -24,7 +28,7 @@ async function getUserDetails({ userEmail, adminToken }) {
         uri: userEndpoint,
         json: true,
         headers: {
-            'X-Access-Token': `Bearer ${adminToken}`
+            'X-Access-Token': headerForToken(adminToken)
         }
     });
     return result.user;
@@ -35,7 +39,7 @@ async function getEvents({ adminToken }) {
         uri: endpoints.eventsEndpoint,
         json: true,
         headers: {
-            'X-Access-Token': `Bearer ${adminToken}`
+            'X-Access-Token': headerForToken(adminToken)
         }
     });
     return result.events;
@@ -51,7 +55,7 @@ async function checkUserIn({ userId, eventId, adminToken }) {
             'user_id': userId
         },
         headers: {
-            'X-Access-Token': `Bearer ${adminToken}`
+            'X-Access-Token': headerForToken(adminToken)
         }
     });
 }
