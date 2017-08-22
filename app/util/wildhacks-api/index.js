@@ -20,23 +20,25 @@ async function signAdminIn({ email, password }) {
 
 async function getUserDetails({ userEmail, adminToken }) {
     const userEndpoint = endpoints.userEndpointForUserWithEmail(userEmail);
-    return await request({
+    const result = await request({
         uri: userEndpoint,
         json: true,
         headers: {
-            'X-Access-Token': adminToken
+            'X-Access-Token': `Bearer ${adminToken}`
         }
     });
+    return result.user;
 }
 
 async function getEvents({ adminToken }) {
-    return await request({
+    const result = await request({
         uri: endpoints.eventsEndpoint,
         json: true,
         headers: {
-            'X-Access-Token': adminToken
+            'X-Access-Token': `Bearer ${adminToken}`
         }
     });
+    return result.events;
 }
 
 async function checkUserIn({ userId, eventId, adminToken }) {
@@ -49,7 +51,7 @@ async function checkUserIn({ userId, eventId, adminToken }) {
             'user_id': userId
         },
         headers: {
-            'X-Access-Token': adminToken
+            'X-Access-Token': `Bearer ${adminToken}`
         }
     });
 }

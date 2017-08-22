@@ -2,9 +2,10 @@
 
 import api from '../app/util/wildhacks-api';
 
+// MAKE SURE THERE ARE AT LEAST 2 TEST USERS IN THE DB, ONE OF WHICH IS AN ADMIN, WITH THESE CREDENTIALS
 const userEmail = 'willie@northwestern.edu';
 const adminEmail = 'steve@me.com';
-const password = 'hunter2';
+const password = 'hunter2'; // same
 
 it('pings', async () => {
     expect.assertions(2);
@@ -44,20 +45,25 @@ it('signs admin in', async () => {
 });
 
 it('gets user details', async () => {
-    expect.assertions(3);
+    expect.assertions(4);
     expect(adminToken).not.toBeNull();
     expect(typeof adminToken).toBe('string');
-    expect(async () => await api.getUserDetails({
+    let user = null;
+    await expect((async () => user = await api.getUserDetails({
         userEmail,
         adminToken
-    })).resolves.toBeDefined();
+    }))()).resolves.toBeDefined();
+    expect(user.email).toBe(userEmail);
+
 });
 
 it('gets events', async () => {
-    expect.assertions(3);
+    expect.assertions(4);
     expect(adminToken).not.toBeNull();
     expect(typeof adminToken).toBe('string');
-    expect(async () => await api.getEvents({
+    let events = null;
+    await expect((async () => events = await api.getEvents({
         adminToken
-    })).resolves.toBeDefined();
+    }))()).resolves.toBeDefined();
+    expect(events instanceof Array).toBe(true);
 });

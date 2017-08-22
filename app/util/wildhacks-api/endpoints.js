@@ -57,7 +57,7 @@ function userEndpointForUserWithEmail(userEmail) {
 }
 
 // GET all events
-const eventsEndpoint = `${apiUrl}/events/all`;
+const eventsEndpoint = `${apiUrl}/event/all`;
 // GET a single event
 function eventEndpointForEventWithId(eventId) {
     const encodedEventId = encodeURIComponent(eventId);
