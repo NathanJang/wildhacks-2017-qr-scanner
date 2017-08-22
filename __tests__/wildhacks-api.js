@@ -71,7 +71,7 @@ it('gets events', async () => {
     await expect((async () => events = await api.getEvents({
         adminToken
     }))()).resolves.toBeDefined();
-    expect(events instanceof Array).toBe(true);
+    expect(events).toBeInstanceOf(Array);
 });
 
 it('checks user in', async () => {
@@ -79,7 +79,7 @@ it('checks user in', async () => {
     expect(typeof adminToken).toBe('string');
     expect(user).not.toBeNull();
     expect(typeof user.id).toBe('number');
-    expect(events instanceof Array).toBe(true);
+    expect(events).toBeInstanceOf(Array);
 
     expect.assertions(events.length * 3 + 5); // total assertions in this test case
     async function expectCheckInToResolve(event) {
