@@ -7,6 +7,8 @@ const apiUrl = (() => {
     return 'http://wildhacks.org/api';
 })();
 
+const pingEndpoint = `${apiUrl}/ping`;
+
 // To be used to sign an admin in with POST
 // Expects an email and password in request body
 // Request:
@@ -47,6 +49,13 @@ function userEndpointForUserWithId(userId) {
     return `${userEndpoint}?id=${encodedUserId}`;
 }
 
+// To be used to get a user's details with GET and `id` query param
+function userEndpointForUserWithEmail(userEmail) {
+    const userEndpoint = `${apiUrl}/user`;
+    const encodedUserEmail = encodeURIComponent(userEmail);
+    return `${userEndpoint}?email=${encodedUserEmail}`;
+}
+
 // GET all events
 const eventsEndpoint = `${apiUrl}/events/all`;
 // GET a single event
@@ -69,8 +78,10 @@ function eventEndpointForEventWithId(eventId) {
 const checkUserInEndpoint = `${apiUrl}/user/check-in`;
 
 export default {
+    pingEndpoint,
     loginEndpoint,
     userEndpointForUserWithId,
+    userEndpointForUserWithEmail,
     eventsEndpoint,
     eventEndpointForEventWithId,
     checkUserInEndpoint

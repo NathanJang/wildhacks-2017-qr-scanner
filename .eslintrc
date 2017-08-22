@@ -1,3 +1,6 @@
 {
-  "extends": ["react-native"]
+  "extends": ["react-native"],
+  "globals": {
+    "__DEV__": true
+  }
 }
