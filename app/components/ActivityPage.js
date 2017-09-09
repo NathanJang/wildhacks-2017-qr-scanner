@@ -9,7 +9,7 @@ import {
     ScrollView,
 } from 'react-native';
 
-import styles from './activitystyles';
+import styles from '../styles/activityView';
 
 export default class ActivityView extends Component {
 
