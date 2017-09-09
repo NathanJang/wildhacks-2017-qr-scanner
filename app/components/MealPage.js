@@ -8,7 +8,7 @@ import {
     TouchableHighlight
 } from 'react-native';
 
-import styles from './activitystyles';
+import styles from '../styles/activityView';
 
 export default class MealPage extends Component {
 
