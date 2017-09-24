@@ -10,6 +10,8 @@ import {
 
 import styles from '../styles/activityView';
 
+import Scanner from './Scanner';
+
 export default class MealPage extends Component {
 
     constructor(props) {
@@ -21,11 +23,22 @@ export default class MealPage extends Component {
                 {key: 'Dinner'}
             ]
         };
+        this.handleScan1 = this.handleScan1.bind(this);
+    }
+    
+    handleScan1() {
+        this.props.navigator.push({
+            title: 'Breakfast',
+            component: Scanner,
+            passProps: {myElement: 'text'}
+        });
     }
 
     render() {
         return (<View style={styles.container}>
-          <TouchableHighlight>
+          <TouchableHighlight
+              onPress={this.handleScan1}
+          >
               <View style={styles.row}>
                   <Text style={styles.item}>
                       Breakfast
