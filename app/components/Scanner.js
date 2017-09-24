@@ -10,7 +10,7 @@ import {
 
 import Camera from 'react-native-camera';
 
-import styles from './scannerstyles';
+import styles from '../styles/scannerstyles';
 
 export default class Scanner extends Component {
 
