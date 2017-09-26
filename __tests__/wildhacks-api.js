@@ -21,27 +21,29 @@ let adminToken = null;
 
 let user = null;
 
-it('signs user in', async () => {
-    expect.assertions(4);
+it(`signs ${userEmail} (user) in with password ${password}`, async () => {
+    expect.assertions(5);
     let result = null;
     await expect((async () => result = await api.signAdminIn({
         email: userEmail,
         password
     }))()).resolves.toBeDefined();
     user = result.user;
+    expect(user).toBeDefined();
     expect(user.email).toBe(userEmail);
     expect(user.password).toBeDefined();
     expect(user.token.value).toBeDefined();
 });
 
-it('signs admin in', async () => {
-    expect.assertions(5);
+it(`signs ${adminEmail} (admin) in with password ${password}`, async () => {
+    expect.assertions(6);
     let result = null;
     await expect((async () => result = await api.signAdminIn({
         email: adminEmail,
         password
     }))()).resolves.toBeDefined();
     const user = result.user;
+    expect(user).toBeDefined();
     expect(user.email).toBe(adminEmail);
     expect(user.privilege).toBe('admin');
     expect(user.password).toBeDefined();
@@ -49,7 +51,7 @@ it('signs admin in', async () => {
     adminToken = user.token.value;
 });
 
-it('gets user details', async () => {
+it(`gets user details for ${userEmail} (user) as ${adminEmail} (admin)`, async () => {
     expect.assertions(4);
     expect(adminToken).not.toBeNull();
     expect(typeof adminToken).toBe('string');
@@ -64,17 +66,18 @@ it('gets user details', async () => {
 
 let events = null;
 
-it('gets events', async () => {
-    expect.assertions(4);
+it(`gets all events (at least 1) as ${adminEmail} (admin)`, async () => {
+    expect.assertions(5);
     expect(adminToken).not.toBeNull();
     expect(typeof adminToken).toBe('string');
     await expect((async () => events = await api.getEvents({
         adminToken
     }))()).resolves.toBeDefined();
     expect(events).toBeInstanceOf(Array);
+    expect(events.length).toBeGreaterThan(0);
 });
 
-it('checks user in', async () => {
+it(`checks ${userEmail} (user) in to all events as ${adminEmail} (admin)`, async () => {
     expect(adminToken).not.toBeNull();
     expect(typeof adminToken).toBe('string');
     expect(user).not.toBeNull();
