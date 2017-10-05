@@ -24,13 +24,31 @@ export default class MealPage extends Component {
             ]
         };
         this.handleScan1 = this.handleScan1.bind(this);
+        this.handleScan2 = this.handleScan2.bind(this);
+        this.handleScan3 = this.handleScan3.bind(this);
     }
     
     handleScan1() {
         this.props.navigator.push({
             title: 'Breakfast',
             component: Scanner,
-            passProps: {myElement: 'text'}
+            passProps: {myElement: 'Breakfast'}
+        });
+    }
+    
+    handleScan2() {
+        this.props.navigator.push({
+            title: 'Lunch',
+            component: Scanner,
+            passProps: {myElement: 'Lunch'}
+        });
+    }
+
+    handleScan3() {
+        this.props.navigator.push({
+            title: 'Dinner',
+            component: Scanner,
+            passProps: {myElement: 'Dinner'}
         });
     }
 
@@ -48,7 +66,9 @@ export default class MealPage extends Component {
 
           <Text style={styles.space}></Text>
 
-          <TouchableHighlight>
+          <TouchableHighlight
+              onPress={this.handleScan2}
+          >
               <View style={styles.row}>
                   <Text style={styles.item}>
                       Lunch
@@ -58,7 +78,9 @@ export default class MealPage extends Component {
 
           <Text style={styles.space}></Text>
 
-          <TouchableHighlight>
+          <TouchableHighlight
+              onPress={this.handleScan3}
+          >
               <View style={styles.row}>
                   <Text style={styles.item}>
                       Dinner
