@@ -5,7 +5,8 @@ import {
   View,
   Linking,
   Vibration,
-  Dimensions
+  Dimensions,
+  AlertIOS
 } from 'react-native';
 
 import Camera from 'react-native-camera';
@@ -14,46 +15,45 @@ import styles from '../styles/scannerstyles';
 
 export default class Scanner extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+  constructor(props) {
+      super(props);
+      this.state = {
+          scanning: true
+      };
+  }
 
-    getInitialState() {
-        return {
-            showCamera: true,
-            cameraType: Camera.constants.Type.back
-        }
+  render() {
+    if (this.state.scanning) {
+      return (
+        <View style={styles.container}>
+          <Camera
+            ref={(cam) => {
+              this.camera = cam;
+            }}
+            style={styles.preview}
+            aspect={Camera.constants.Aspect.fill}
+            onBarCodeRead={this._onBarCodeRead.bind(this)}
+            >
+          </Camera>
+        </View>
+      );
     }
-
-    renderCamera() {
-        if(this.state.showCamera) {
-            return (
-                <Camera
-                    ref="cam"
-                    style={styles.container}
-                    onBarCodeRead={this._onBarCodeRead}
-                    type={this.state.cameraType}>
-                </Camera>
-            );
-        } else {
-            return (
-                <View></View>
-            );
-        }
+    else {
+      return (
+        <View style={styles.scan_container}>
+          <Text style={styles.item}>
+            Go Back!
+          </Text>
+        </View>
+      );
     }
-
-    render() {
-        return (
-            this.renderCamera()
-        );
-    }
+  }
 
     _onBarCodeRead(e) {
-        this.setState({showCamera: false});
+        Vibration.vibrate();
+        this.setState({scanning: false});
         AlertIOS.alert(
-            "Scan successful",
-            "Type: " + e.type + "\nData: " + e.data
+            "ID: " + e.data
         );
     }
 
