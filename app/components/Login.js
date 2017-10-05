@@ -21,6 +21,7 @@ import ActivityView from './ActivityView';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export default class Login extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {};
