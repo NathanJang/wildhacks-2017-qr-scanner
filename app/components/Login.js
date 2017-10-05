@@ -18,6 +18,8 @@ import styles from '../styles/login';
 
 import ActivityView from './ActivityView';
 
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -58,7 +60,11 @@ export default class Login extends Component {
             : (<View/>);
 
         return (
-            <ScrollView contentContainerStyle={styles.container}>
+            <KeyboardAwareScrollView
+              contentContainerStyle={styles.container}
+              resetScrollToCoords={{ x: 0, y: 0 }}
+              scrollEnabled={false}
+            >
 
                 <Image source={require('../assets/wildhackslogo.png')} style={styles.image}/>
 
@@ -102,7 +108,7 @@ export default class Login extends Component {
                 {spinner}
                 <Text style={styles.description}>{this.state.message}</Text>
 
-            </ScrollView>
+            </KeyboardAwareScrollView>
         );
 
     }
