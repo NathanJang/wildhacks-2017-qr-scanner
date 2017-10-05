@@ -15,6 +15,8 @@ import MealPage from './MealPage';
 
 import ActivityPage from './ActivityPage';
 
+import Scanner from './Scanner';
+
 export default class ActivityView extends Component {
 
     constructor(props) {
@@ -28,6 +30,7 @@ export default class ActivityView extends Component {
         };
         this.handleMeals = this.handleMeals.bind(this);
         this.handleActivities = this.handleActivities.bind(this);
+        this.handleRegistration = this.handleRegistration.bind(this);
     }
 
     handleMeals() {
@@ -45,11 +48,20 @@ export default class ActivityView extends Component {
             passProps: {myElement: 'text'}
         });
     }
-
+    
+    handleRegistration() {
+        this.props.navigator.push({
+            title: 'Registration',
+            component: Scanner,
+            passProps: {myElement: 'Register'}
+        });
+    }
 
     render() {
         return (<View style={styles.container}>
-            <TouchableHighlight>
+            <TouchableHighlight
+              onPress={this.handleRegistration}
+            >
                 <View style={styles.row}>
                     <Text style={styles.item}>
                         Registration
