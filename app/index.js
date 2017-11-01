@@ -3,27 +3,39 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    NavigatorIOS
+    // NavigatorIOS
 } from 'react-native';
 
-import Login from './components/Login';
-import styles from './styles/index';
+import {Navigation} from 'react-native-navigation';
+import registerScreens from './screens';
 
-export default class Wildhacks2017QRScanner extends Component {
+// import Login from './components/Login';
+// import styles from './styles/index';
 
-    initialComponent = Login
+// export default class Wildhacks2017QRScanner extends Component {
 
-    render() {
-        return (
-            <NavigatorIOS
-                style = {styles.container}
-                initialRoute={{
-                    title: 'QR Scanner',
-                    component: this.initialComponent
-                }}
-            />
-        );
+//     initialComponent = Login
+
+//     render() {
+//         return (
+//             <NavigatorIOS
+//                 style = {styles.container}
+//                 initialRoute={{
+//                     title: 'QR Scanner',
+//                     component: this.initialComponent
+//                 }}
+//             />
+//         );
+//     }
+// }
+
+// AppRegistry.registerComponent('Wildhacks2017QRScanner', () => Wildhacks2017QRScanner);
+
+registerScreens()
+
+Navigation.startSingleScreenApp({
+    screen: {
+        screen: 'ActivityView',
+        title: 'Activities'
     }
-}
-
-AppRegistry.registerComponent('Wildhacks2017QRScanner', () => Wildhacks2017QRScanner);
+})

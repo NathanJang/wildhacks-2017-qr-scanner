@@ -11,87 +11,168 @@ import {
 
 import styles from '../styles/activityView';
 
-import MealPage from './MealPage';
+// import MealPage from './MealPage';
 
-import ActivityPage from './ActivityPage';
+// import ActivityPage from './ActivityPage';
 
-import Scanner from './Scanner';
+// import Scanner from './Scanner';
 
 export default class ActivityView extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                {key: 'Registration'},
-                {key: 'Meal'},
-                {key: 'Activity'}
-            ]
+            // data: [
+            //     {key: 'Registration'},
+            //     {key: 'Meal'},
+            //     {key: 'Activity'}
+            // ]
+            data: [{
+                "id": 1,
+                "name": "Check-In",
+                "description": "Go hacks",
+                "metaValue": "",
+                "createdAt": "2017-10-31T11:42:57.000Z",
+                "updatedAt": "2017-10-31T11:42:57.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Workshop 1",
+                "description": "Go hacks",
+                "metaValue": "",
+                "createdAt": "2017-10-31T11:42:57.000Z",
+                "updatedAt": "2017-10-31T11:42:57.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Workshop 2",
+                "description": "Go hacks",
+                "metaValue": "",
+                "createdAt": "2017-10-31T11:42:57.000Z",
+                "updatedAt": "2017-10-31T11:42:57.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Dinner",
+                "description": "Go hacks",
+                "metaValue": "",
+                "createdAt": "2017-10-31T11:42:57.000Z",
+                "updatedAt": "2017-10-31T11:42:57.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Midnight Snacks",
+                "description": "Go hacks",
+                "metaValue": "",
+                "createdAt": "2017-10-31T11:42:57.000Z",
+                "updatedAt": "2017-10-31T11:42:57.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Breakfast",
+                "description": "Go hacks",
+                "metaValue": "",
+                "createdAt": "2017-10-31T11:42:57.000Z",
+                "updatedAt": "2017-10-31T11:42:57.000Z"
+            }]
         };
-        this.handleMeals = this.handleMeals.bind(this);
-        this.handleActivities = this.handleActivities.bind(this);
-        this.handleRegistration = this.handleRegistration.bind(this);
+        // this.handleMeals = this.handleMeals.bind(this);
+        // this.handleActivities = this.handleActivities.bind(this);
+        // this.handleRegistration = this.handleRegistration.bind(this);
+
+        this.renderItem = this.renderItem.bind(this)
+        // this.handleItemPress = this.handleItemPress.bind(this)
     }
 
-    handleMeals() {
+    // handleMeals() {
+    //     this.props.navigator.push({
+    //         title: 'Meals',
+    //         component: MealPage,
+    //         passProps: {myElement: 'text'}
+    //     });
+    // }
+
+    // handleActivities() {
+    //     this.props.navigator.push({
+    //         title: 'Activities',
+    //         component: ActivityPage,
+    //         passProps: {myElement: 'text'}
+    //     });
+    // }
+
+    // handleRegistration() {
+    //     this.props.navigator.push({
+    //         title: 'Registration',
+    //         component: Scanner,
+    //         passProps: {myElement: 'Register'}
+    //     });
+    // }
+
+    handleItemPress(item) {
         this.props.navigator.push({
-            title: 'Meals',
-            component: MealPage,
-            passProps: {myElement: 'text'}
-        });
+            screen: 'Scanner',
+            title: `${item.name}`,
+            passProps: { item }
+        })
     }
 
-    handleActivities() {
-        this.props.navigator.push({
-            title: 'Activities',
-            component: ActivityPage,
-            passProps: {myElement: 'text'}
-        });
-    }
-    
-    handleRegistration() {
-        this.props.navigator.push({
-            title: 'Registration',
-            component: Scanner,
-            passProps: {myElement: 'Register'}
-        });
+    renderItem({item}) {
+        return (
+            <TouchableHighlight
+                onPress={() => this.handleItemPress(item)}
+            >
+                <View style={styles.row}>
+                    <Text style={styles.item}>
+                        {item.name}
+                    </Text>
+                </View>
+            </TouchableHighlight>
+        )
     }
 
     render() {
-        return (<View style={styles.container}>
-            <TouchableHighlight
-              onPress={this.handleRegistration}
-            >
-                <View style={styles.row}>
-                    <Text style={styles.item}>
-                        Registration
-                    </Text>
-                </View>
-            </TouchableHighlight>
+        // return (<View style={styles.container}>
+        //     <TouchableHighlight
+        //       onPress={this.handleRegistration}
+        //     >
+        //         <View style={styles.row}>
+        //             <Text style={styles.item}>
+        //                 Registration
+        //             </Text>
+        //         </View>
+        //     </TouchableHighlight>
 
-            <Text style={styles.space}></Text>
+        //     <Text style={styles.space}></Text>
 
-            <TouchableHighlight 
-                onPress={this.handleMeals}
-            >
-                <View style={styles.row}>
-                    <Text style={styles.item}>
-                        Meals
-                    </Text>
-                </View>
-            </TouchableHighlight>
+        //     <TouchableHighlight
+        //         onPress={this.handleMeals}
+        //     >
+        //         <View style={styles.row}>
+        //             <Text style={styles.item}>
+        //                 Meals
+        //             </Text>
+        //         </View>
+        //     </TouchableHighlight>
 
-            <Text style={styles.space}></Text>
+        //     <Text style={styles.space}></Text>
 
-            <TouchableHighlight
-                onPress={this.handleActivities}
-            >
-                <View style={styles.row}>
-                    <Text style={styles.item}>
-                        Activities
-                    </Text>
-                </View>
-            </TouchableHighlight>
-        </View>);
+        //     <TouchableHighlight
+        //         onPress={this.handleActivities}
+        //     >
+        //         <View style={styles.row}>
+        //             <Text style={styles.item}>
+        //                 Activities
+        //             </Text>
+        //         </View>
+        //     </TouchableHighlight>
+        // </View>);
+
+        return (
+            <FlatList
+                data={this.state.data}
+                renderItem={this.renderItem}
+                keyExtractor={(item, index) => index}
+            />
+        )
     }
 }
