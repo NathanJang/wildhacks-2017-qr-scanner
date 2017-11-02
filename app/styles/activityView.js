@@ -1,11 +1,9 @@
-// @flow
-
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
         flex: 1,
-        padding: 8,
+        padding: 20,
         flexDirection: 'column', // main axis
         justifyContent: 'center', // main axis
         alignItems: 'center', // cross axis
@@ -18,7 +16,7 @@ export default StyleSheet.create({
         borderColor: '#ED8580',
         flexDirection: 'column',  // main axis
         justifyContent: 'space-around', // main axis
-        alignItems: 'center', // cross axis
+        // alignItems: 'center', // cross axis
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 18,
@@ -33,12 +31,9 @@ export default StyleSheet.create({
         flexDirection: 'column',  // main axis
         justifyContent: 'space-around', // main axis
         alignItems: 'center', // cross axis
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 18,
-        paddingRight: 16,
         width: 300,
-        marginTop: 80,
+        marginTop: 20,
+        marginBottom: 20
     },
     space: {
         backgroundColor: '#ED8580',
@@ -47,8 +42,8 @@ export default StyleSheet.create({
     item: {
         color: '#FFF',
         includeFontPadding: false,
-        fontSize: 30,
-        padding: 10,
+        fontSize: 18,
+        padding: 18,
         height: 44,
         marginBottom: 10,
         fontFamily: 'Menlo',

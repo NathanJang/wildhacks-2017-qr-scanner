@@ -101,7 +101,7 @@ export default class Scanner extends Component {
                   Alert.alert(
                     (() => {
                       if (response.success === undefined) {
-                        return 'ERROR: Unexpected response from server.'
+                        return 'ERROR: Unexpected response from server. Try again.'
                       }
                       if (response.success === false) {
                         return 'WARNING: User has already checked in.'
