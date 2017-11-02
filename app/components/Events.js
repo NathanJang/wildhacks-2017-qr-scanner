@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 
 import {
@@ -7,15 +5,17 @@ import {
     View,
     FlatList,
     TouchableHighlight,
+    Image
 } from 'react-native';
 
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import styles from '../styles/activityView';
+import styles from '../styles/events';
+import navigatorStyle from '../styles/navigator-style'
 
 import api from '../util/wildhacks-api'
 
-export default class ActivityView extends Component {
+export default class Events extends Component {
 
     constructor(props) {
         super(props);
@@ -27,9 +27,9 @@ export default class ActivityView extends Component {
         this.renderItem = this.renderItem.bind(this)
 
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
-
-
     }
+
+    static navigatorStyle = navigatorStyle
 
     onNavigatorEvent(event) {
         if (event.id === 'didAppear') {
@@ -42,7 +42,7 @@ export default class ActivityView extends Component {
                     })
                 }, 300)
             }).catch(() => {
-                this.props.navigator.setTitle({title: 'Connection Error. Restart App'})
+                this.props.navigator.setTitle({title: 'Connection Error. Restart App', isLoading: false})
             })
         }
     }
@@ -57,17 +57,23 @@ export default class ActivityView extends Component {
 
     renderItem({item}) {
         return (
-            <View style={styles.activity_rows}>
-                <TouchableHighlight
-                    onPress={() => this.handleItemPress(item)}
-                >
-                    <View style={styles.row}>
-                        <Text style={styles.item} numberOfLines={1}>
-                            {item.id}: {item.name}
+            <TouchableHighlight
+                onPress={() => this.handleItemPress(item)}
+                underlayColor={'rgba(0, 0, 0, 0.2)'}
+                style={styles.item}
+            >
+                <View style={styles.itemContent}>
+                    <View style={styles.textContainer}>
+                        <Text numberOfLines={1} style={styles.title}>
+                            {item.name}
+                        </Text>
+                        <Text style={styles.subtitle}>
+                            {item.description || 'No description.'}
                         </Text>
                     </View>
-                </TouchableHighlight>
-            </View>
+                    <Image source={require('../assets/DetailDisclosureIndicator.png')} style={styles.caret} resizeMode={'contain'}/>
+                </View>
+            </TouchableHighlight>
         )
     }
 
@@ -79,6 +85,7 @@ export default class ActivityView extends Component {
                     data={this.state.data}
                     renderItem={this.renderItem}
                     keyExtractor={(item, index) => index}
+                    style={styles.fullWidth}
                 />
             </View>
         )

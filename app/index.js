@@ -5,7 +5,7 @@ registerScreens()
 
 Navigation.startSingleScreenApp({
     screen: {
-        screen: 'ActivityView',
-        title: 'WildHacks 2017'
+        screen: 'Events',
+        title: 'Wild Check-Ins 2017'
     }
 })

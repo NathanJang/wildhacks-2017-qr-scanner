@@ -10,7 +10,8 @@ import Camera from 'react-native-camera';
 
 import Spinner from 'react-native-loading-spinner-overlay'
 
-import styles from '../styles/scannerstyles';
+import styles from '../styles/scanner';
+import navigatorStyle from '../styles/navigator-style'
 
 import api from '../util/wildhacks-api'
 
@@ -22,6 +23,8 @@ export default class Scanner extends Component {
             scanning: true
         };
     }
+
+    static navigatorStyle = navigatorStyle
 
     render() {
       return (
