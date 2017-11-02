@@ -9,6 +9,8 @@ import {
     TouchableHighlight,
 } from 'react-native';
 
+import Spinner from 'react-native-loading-spinner-overlay'
+
 import styles from '../styles/activityView';
 
 // import MealPage from './MealPage';
@@ -16,6 +18,8 @@ import styles from '../styles/activityView';
 // import ActivityPage from './ActivityPage';
 
 // import Scanner from './Scanner';
+
+import api from '../util/wildhacks-api'
 
 export default class ActivityView extends Component {
 
@@ -27,7 +31,7 @@ export default class ActivityView extends Component {
             //     {key: 'Meal'},
             //     {key: 'Activity'}
             // ]
-            data: [{
+            data: [/*{
                 "id": 1,
                 "name": "Check-In",
                 "description": "Go hacks",
@@ -74,7 +78,8 @@ export default class ActivityView extends Component {
                 "metaValue": "",
                 "createdAt": "2017-10-31T11:42:57.000Z",
                 "updatedAt": "2017-10-31T11:42:57.000Z"
-            }]
+            }*/],
+            isLoading: true
         };
         // this.handleMeals = this.handleMeals.bind(this);
         // this.handleActivities = this.handleActivities.bind(this);
@@ -82,6 +87,24 @@ export default class ActivityView extends Component {
 
         this.renderItem = this.renderItem.bind(this)
         // this.handleItemPress = this.handleItemPress.bind(this)
+
+        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+
+
+    }
+
+    onNavigatorEvent(event) {
+        if (event.id === 'didAppear') {
+            this.setState({isLoading: true})
+            api.getEvents().then(events => {
+                setTimeout(() => {
+                    this.setState({
+                        data: events,
+                        isLoading: false
+                    })
+                }, 300)
+            })
+        }
     }
 
     // handleMeals() {
@@ -168,11 +191,14 @@ export default class ActivityView extends Component {
         // </View>);
 
         return (
-            <FlatList
-                data={this.state.data}
-                renderItem={this.renderItem}
-                keyExtractor={(item, index) => index}
-            />
+            <View style={{flex: 1}}>
+                <Spinner visible={this.state.isLoading}/>
+                <FlatList
+                    data={this.state.data}
+                    renderItem={this.renderItem}
+                    keyExtractor={(item, index) => index}
+                />
+            </View>
         )
     }
 }

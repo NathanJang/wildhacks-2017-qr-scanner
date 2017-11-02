@@ -2,7 +2,7 @@
 
 const apiUrl = (() => {
     if (__DEV__) {
-        return 'http://localhost:8080'
+        return 'http://10.105.171.39:8080'
     }
     return 'http://wildhacks.org/api';
 })();
@@ -44,14 +44,14 @@ const loginEndpoint = `${apiUrl}/auth/login`;
 
 // To be used to get a user's details with GET and `id` query param
 function userEndpointForUserWithId(userId) {
-    const userEndpoint = `${apiUrl}/user`;
+    const userEndpoint = `${apiUrl}/admin/user`;
     const encodedUserId = encodeURIComponent(userId);
     return `${userEndpoint}?id=${encodedUserId}`;
 }
 
 // To be used to get a user's details with GET and `id` query param
 function userEndpointForUserWithEmail(userEmail) {
-    const userEndpoint = `${apiUrl}/user`;
+    const userEndpoint = `${apiUrl}/admin/user`;
     const encodedUserEmail = encodeURIComponent(userEmail);
     return `${userEndpoint}?email=${encodedUserEmail}`;
 }

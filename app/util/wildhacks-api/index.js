@@ -1,6 +1,7 @@
 // @flow
 import endpoints from './endpoints';
-import request from 'request-promise';
+
+const GATEKEY = 'fuckoff'
 
 function headerForToken(token) {
     return `Bearer ${token}`;
@@ -22,42 +23,41 @@ async function signAdminIn({ email, password }) {
     });
 }
 
-async function getUserDetails({ userEmail, adminToken }) {
+async function getUserDetails({ userEmail }) {
     const userEndpoint = endpoints.userEndpointForUserWithEmail(userEmail);
-    const result = await request({
-        uri: userEndpoint,
-        json: true,
+    const response = await fetch(userEndpoint, {
         headers: {
-            'X-Access-Token': headerForToken(adminToken)
+            'x-access-gatekey': GATEKEY
         }
     });
+    const result = await response.json()
     return result.user;
 }
 
-async function getEvents({ adminToken }) {
-    const result = await request({
-        uri: endpoints.eventsEndpoint,
-        json: true,
+async function getEvents() {
+    const response = await fetch(endpoints.eventsEndpoint, {
         headers: {
-            'X-Access-Token': headerForToken(adminToken)
+            'x-access-gatekey': GATEKEY
         }
     });
+    const result = await response.json()
     return result.events;
 }
 
 async function checkUserIn({ userId, eventId, adminToken }) {
-    return await request({
-        uri: endpoints.checkUserInEndpoint,
+    const response = await fetch(endpoints.checkUserInEndpoint, {
         method: 'POST',
-        json: true,
-        body: {
+        body: JSON.stringify({
             'event_id': eventId,
             'user_id': userId
-        },
+        }),
         headers: {
-            'X-Access-Token': headerForToken(adminToken)
+            'x-access-gatekey': GATEKEY,
+            'Content-Type': 'application/json'
         }
     });
+    const result = await response.json()
+    return result
 }
 
 export default {
