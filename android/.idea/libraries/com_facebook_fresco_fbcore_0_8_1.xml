@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.facebook.fresco:fbcore-0.8.1">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/fbcore-0.8.1.aar/20537385a2d420eda3f583b709fb4213/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/fbcore-0.8.1.aar/20537385a2d420eda3f583b709fb4213/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../node_modules/react-native-camera/android/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.8.1/res" />
+      <root url="jar://$PROJECT_DIR$/../node_modules/react-native-camera/android/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.8.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

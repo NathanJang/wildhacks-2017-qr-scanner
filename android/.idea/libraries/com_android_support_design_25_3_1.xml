@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="com.android.support:design-25.3.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-25.3.1.aar/64a4d4f2a7c441db1071168b08b3499d/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/design-25.3.1.aar/64a4d4f2a7c441db1071168b08b3499d/res" />
+      <root url="file://$PROJECT_DIR$/../node_modules/react-native-navigation/android/app/build/intermediates/exploded-aar/com.android.support/design/25.3.1/res" />
+      <root url="jar://$PROJECT_DIR$/../node_modules/react-native-navigation/android/app/build/intermediates/exploded-aar/com.android.support/design/25.3.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
