@@ -1,7 +1,8 @@
 // @flow
 import endpoints from './endpoints';
 
-const GATEKEY = 'fuckoff'
+import env from '../../env'
+const GATEKEY = env.GATEKEY
 
 function headerForToken(token) {
     return `Bearer ${token}`;

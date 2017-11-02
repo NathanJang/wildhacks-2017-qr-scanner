@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 
 import {
-    Text,
     View,
-    Linking,
     Vibration,
-    Dimensions,
     Alert
 } from 'react-native';
 
@@ -41,15 +38,6 @@ export default class Scanner extends Component {
           </Camera>
         </View>
       );
-      // else {
-      //   return (
-      //     <View style={styles.scan_container}>
-      //       <Text style={styles.item}>
-      //         Go Back!
-      //       </Text>
-      //     </View>
-      //   );
-      // }
     }
 
     static userInfoFromQrString(qrString) {
@@ -65,9 +53,6 @@ export default class Scanner extends Component {
       if (this.state.scanning) {
         Vibration.vibrate();
         this.setState({scanning: false});
-        // AlertIOS.alert(
-        //     "ID: " + e.data
-        // );
         const userInfo = Scanner.userInfoFromQrString(e.data)
         if (!userInfo || !userInfo.email) {
           Alert.alert(`ERROR: Invalid QR Code`, `Scanned: ${e.data}`, [{ text: 'Okay', onPress: () => this.setState({scanning: true}), style: 'default' }])

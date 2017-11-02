@@ -1,9 +1,6 @@
-const apiUrl = (() => {
-    if (__DEV__) {
-        return 'http://10.105.171.39:8080'
-    }
-    return 'http://wildhacks.org/api';
-})();
+import env from '../../env'
+
+const apiUrl = env.API_URL
 
 // To be used to get a user's details with GET and `id` query param
 function userEndpointForUserWithEmail(userEmail) {
