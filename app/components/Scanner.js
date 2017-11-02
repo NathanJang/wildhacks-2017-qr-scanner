@@ -23,7 +23,8 @@ export default class Scanner extends Component {
         super(props);
         this.state = {
             scanning: true,
-            promptIsVisible: false
+            promptIsVisible: false,
+            spinnerIsVisible: false
         };
         this.onNavigatorEvent = this.onNavigatorEvent.bind(this)
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
@@ -49,7 +50,7 @@ export default class Scanner extends Component {
     onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
       if (event.type === 'NavBarButtonPress') { // this is the event type for button presses
         if (event.id === 'manual') { // this is the same id field from the static navigatorButtons definition
-          this.setState({promptIsVisible: true})
+          this.setState({promptIsVisible: true, scanning: false, spinnerIsVisible: false})
         }
       }
     }
@@ -57,7 +58,7 @@ export default class Scanner extends Component {
     render() {
       return (
         <View style={styles.container}>
-          <Spinner visible={!this.state.scanning}/>
+          <Spinner visible={this.state.spinnerIsVisible}/>
           <Camera
             ref={cam => {
               this.camera = cam;
@@ -73,12 +74,14 @@ export default class Scanner extends Component {
             visible={ this.state.promptIsVisible }
             onCancel={() => {
               this.setState({
-                promptIsVisible: false
+                promptIsVisible: false,
+                scanning: true
               })
             }}
             onSubmit={ email => {
               this.setState({
-                promptIsVisible: false
+                promptIsVisible: false,
+                scanning: true
               })
               this._receivedUserInfo({ email })
             }}
@@ -104,11 +107,11 @@ export default class Scanner extends Component {
     _receivedUserInfo(userInfo) {
       api.getUserDetails({ userEmail: userInfo.email }).then(user => {
           if (!user) {
-            Alert.alert('ERROR: User not found on server.', `Scanned email: ${userInfo.email}`, [{ text: 'Okay', onPress: () => this.setState({scanning: true}), style: 'default' }])
+            Alert.alert('ERROR: User not found on server.', `Scanned email: ${userInfo.email}`, [{ text: 'Okay', onPress: () => this.setState({scanning: true, spinnerIsVisible: false}), style: 'default' }])
             return
           }
           if (!(typeof user.id === 'number')) {
-            Alert.alert('ERROR: Unexpected response from server.', `Scanned email: ${userInfo.email}`, [{ text: 'Okay', onPress: () => this.setState({scanning: true}), style: 'default' }])
+            Alert.alert('ERROR: Unexpected response from server.', `Scanned email: ${userInfo.email}`, [{ text: 'Okay', onPress: () => this.setState({scanning: true, spinnerIsVisible: false}), style: 'default' }])
             return
           }
           Alert.alert(
@@ -117,7 +120,7 @@ export default class Scanner extends Component {
           [
             {
               text: 'Cancel',
-              onPress: () => {this.setState({scanning: true})},
+              onPress: () => {this.setState({scanning: true, spinnerIsVisible: false})},
               style: 'cancel'
             },
             {
@@ -141,7 +144,7 @@ export default class Scanner extends Component {
                     [{
                       text: 'Continue',
                       onPress: () => {
-                        this.setState({scanning: true})
+                        this.setState({scanning: true, spinnerIsVisible: false})
                       },
                       style: response.success ? 'default' : 'destructive'
                     }]
@@ -158,10 +161,10 @@ export default class Scanner extends Component {
     _onBarCodeRead(e) {
       if (this.state.scanning) {
         Vibration.vibrate();
-        this.setState({scanning: false});
+        this.setState({scanning: false, spinnerIsVisible: true});
         const userInfo = Scanner.userInfoFromQrString(e.data)
         if (!userInfo || !userInfo.email) {
-          Alert.alert(`ERROR: Invalid QR Code`, `Scanned: ${e.data}`, [{ text: 'Okay', onPress: () => this.setState({scanning: true}), style: 'default' }])
+          Alert.alert(`ERROR: Invalid QR Code`, `Scanned: ${e.data}`, [{ text: 'Okay', onPress: () => this.setState({scanning: true, spinnerIsVisible: false}), style: 'default' }])
           return
         }
         this._receivedUserInfo(userInfo)
