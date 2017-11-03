@@ -4,26 +4,6 @@ import endpoints from './endpoints';
 import env from '../../env'
 const GATEKEY = env.GATEKEY
 
-function headerForToken(token) {
-    return `Bearer ${token}`;
-}
-
-async function ping() {
-    return await request({
-        uri: endpoints.pingEndpoint,
-        json: true
-    });
-}
-
-async function signAdminIn({ email, password }) {
-    return await request({
-        method: 'POST',
-        uri: endpoints.loginEndpoint,
-        body: { email, password },
-        json: true
-    });
-}
-
 async function getUserDetails({ userEmail }) {
     const userEndpoint = endpoints.userEndpointForUserWithEmail(userEmail);
     const response = await fetch(userEndpoint, {
@@ -42,10 +22,13 @@ async function getEvents() {
         }
     });
     const result = await response.json()
-    return result.events;
+    if (result.events instanceof Array) {
+        return result.events
+    }
+    throw new Error('Unexpected server response')
 }
 
-async function checkUserIn({ userId, eventId, adminToken }) {
+async function checkUserIn({ userId, eventId }) {
     const response = await fetch(endpoints.checkUserInEndpoint, {
         method: 'POST',
         body: JSON.stringify({
@@ -62,8 +45,6 @@ async function checkUserIn({ userId, eventId, adminToken }) {
 }
 
 export default {
-    ping,
-    signAdminIn,
     getUserDetails,
     getEvents,
     checkUserIn

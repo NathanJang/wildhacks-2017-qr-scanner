@@ -42,7 +42,8 @@ export default class Events extends Component {
                     })
                 }, 300)
             }).catch(() => {
-                this.props.navigator.setTitle({title: 'Connection Error. Restart App', isLoading: false})
+                this.props.navigator.setTitle({title: 'Connection Error. Restart App'})
+                this.setState({isLoading: false})
             })
         }
     }
